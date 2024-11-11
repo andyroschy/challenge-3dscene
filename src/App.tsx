@@ -1,19 +1,8 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import { getFrame, Frame } from './getFrame';
+import "./App.css";
+import { Scene } from "./Scene";
 
 function App() {
-  const [ currentFrame, setCurrentFrame] = useState<Frame | null>(null);
-
-  useEffect(() => {
-    getFrame(0).then(setCurrentFrame);
-  }, []);
-
-  return (
-    <>
-      {JSON.stringify(currentFrame)}
-    </>
-  )
+  return <Scene />;
 }
 
-export default App
+export default App;

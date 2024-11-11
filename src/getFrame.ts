@@ -1,5 +1,6 @@
 const MAX_FRAMES = 50;
-// cahce frames in memroy -  array instead of map since frames are consecutive numbers 
+
+// cahce frames in memroy
 const frames: (Frame | undefined)[] = Array(MAX_FRAMES);
 
 // On a production app this would be an environment variable, of course. 
@@ -13,14 +14,14 @@ const frameUri = (n: number) => `https://static.scale.com/uploads/pandaset-chall
 export const getFrame = async (n: number): Promise<Frame> => {
     if (n < 0 || n > MAX_FRAMES ) { throw new Error('Invalid frame'); }
 
-    if (frames[n]) { return frames[n]; }
+    if (frames[n]) { return Promise.resolve(frames[n]); }
 
     const response = await fetch(frameUri(n));
     if (response.status < 200 || response.status >= 299) { throw new Error('There was an error fetching the frame '); } 
 
     const rawResponse: any = await response.json();
     
-    return { 
+    const frame = { 
         frameId: rawResponse.frame_id,
         points: rawResponse.points,
         cuboids: rawResponse.cuboids.map((cuboid: any) => ({
@@ -43,6 +44,9 @@ export const getFrame = async (n: number): Promise<Frame> => {
             yaw: cuboid.yaw,
         }) as Cuboid)
     } as Frame;
+
+    frames[n] = frame;
+    return frame;
 }
 
 
@@ -72,6 +76,6 @@ export type Dimension3D = Coordinate3D;
 
 export interface Frame {
     frameId: number;
-    cuboids: Point[];
-    points: Cuboid[]
+    cuboids: Cuboid[];
+    points: Point[]
 }
