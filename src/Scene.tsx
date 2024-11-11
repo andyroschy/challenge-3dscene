@@ -4,16 +4,28 @@ import { Frame, getFrame } from "./getFrame";
 import { FramePoints } from "./FramePoints";
 
 export function Scene() {
+  const [frameN, setFrameN] = useState(0);
   const [currentFrame, setCurrentFrame] = useState<Frame | null>(null);
 
   useEffect(() => {
-    getFrame(7).then(setCurrentFrame);
-  }, []);
+    setCurrentFrame(null);
+    getFrame(frameN).then(setCurrentFrame);
+  }, [frameN]);
 
   if (!currentFrame) return "loading...";
 
   return (
     <>
+      <div style={{
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        zIndex: 9999
+      }}>
+        <button onClick={() => setFrameN((n) => --n)}>-</button>
+        {frameN}
+        <button onClick={() => setFrameN((n) => ++n)}>+</button>
+      </div>
       <Canvas>
         <FramePoints frame={currentFrame} />
       </Canvas>

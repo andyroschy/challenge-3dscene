@@ -45,7 +45,7 @@ export const getFrame = async (n: number): Promise<Frame> => {
         }) as Cuboid)
     } as Frame;
 
-    frames[n] = frame;
+    // frames[n] = frame;
     return frame;
 }
 
