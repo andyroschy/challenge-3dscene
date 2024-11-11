@@ -15,7 +15,7 @@ export function Cuboids({ frame }: { frame: Frame }) {
               cuboid.position.y,
               cuboid.position.z,
             ]}
-            rotation={new Euler(0,0, cuboid.yaw, 'XYZ')}
+            rotation={new Euler(0,cuboid.yaw,0, 'XYZ')}
           >
             <boxGeometry args={[cuboid.dimensions.x, cuboid.dimensions.y, cuboid.dimensions.z]}></boxGeometry>
             <meshBasicMaterial color="green" wireframe></meshBasicMaterial>
