@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Frame } from "./getFrame";
 
+
 export function FramePoints({ frame }: { frame: Frame }) {
   const pts = useMemo(
     () =>
@@ -23,7 +24,7 @@ export function FramePoints({ frame }: { frame: Frame }) {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial color={"red"} size={0.1}></pointsMaterial>
+      <pointsMaterial color={"red"} size={0.05}></pointsMaterial>
     </points>
   );
 }

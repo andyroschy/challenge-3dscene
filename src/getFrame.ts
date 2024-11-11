@@ -21,7 +21,7 @@ export const getFrame = async (n: number): Promise<Frame> => {
 
     const rawResponse: any = await response.json();
 
-    // NOTE: coordinates in the payload seemed to be scrambled based on YAW being Y axis, and the default behavior of camera controls
+    // NOTE: coordinates axis in the payload seemed to be scrambled based on YAW being Y axis, and the default behavior of camera controls
     const frame = {
         frameId: rawResponse.frame_id,
         points: rawResponse.points.map((x: Point) => [x[1], x[2], x[0]]),
