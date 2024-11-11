@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { useState, useEffect } from "react";
 import { Frame, getFrame } from "./getFrame";
 import { FramePoints } from "./FramePoints";
+import { Cuboids } from "./Cuboids";
 
 export function Scene() {
   const [frameN, setFrameN] = useState(0);
@@ -28,6 +29,7 @@ export function Scene() {
       </div>
       <Canvas>
         <FramePoints frame={currentFrame} />
+        <Cuboids frame={currentFrame}/>
       </Canvas>
     </>
   );
