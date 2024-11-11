@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Frame, getFrame } from "./getFrame";
 import { FramePoints } from "./FramePoints";
 import { Cuboids } from "./Cuboids";
+import { OrbitControls } from "@react-three/drei";
 
 export function Scene() {
   const [frameN, setFrameN] = useState(0);
@@ -28,6 +29,7 @@ export function Scene() {
         <button onClick={() => setFrameN((n) => ++n)}>+</button>
       </div>
       <Canvas>
+        <OrbitControls />
         <FramePoints frame={currentFrame} />
         <Cuboids frame={currentFrame}/>
       </Canvas>
