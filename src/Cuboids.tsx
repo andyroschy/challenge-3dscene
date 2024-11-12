@@ -5,34 +5,19 @@ import { Text } from "@react-three/drei";
 
 interface CuboidsProp {
   frame: Frame;
-  onDisplayDetails: (cuboid: Cuboid, mouseCoords: [number]) => void;
 }
 
-export function Cuboids({
-  frame,
-  onDisplayDetails: onViewDetail,
-}: CuboidsProp) {
+export function Cuboids({ frame }: CuboidsProp) {
   return (
     <>
       {frame.cuboids.map((cuboid) => {
-        return (
-          <SingleCuboid
-            cuboid={cuboid}
-            key={cuboid.uuid}
-            onViewDetail={onViewDetail}
-          />
-        );
+        return <SingleCuboid cuboid={cuboid} key={cuboid.uuid} />;
       })}
     </>
   );
 }
 
-function SingleCuboid({
-  cuboid,
-}: {
-  cuboid: Cuboid;
-  onViewDetail: CuboidsProp["onDisplayDetails"];
-}) {
+function SingleCuboid({ cuboid }: { cuboid: Cuboid }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -43,8 +28,12 @@ function SingleCuboid({
     >
       {hovered ? (
         <Text
-          position={[cuboid.position.x, cuboid.position.y + 3, cuboid.position.z]}
-          fontSize={0.5} 
+          position={[
+            cuboid.position.x,
+            cuboid.position.y + 3,
+            cuboid.position.z,
+          ]}
+          fontSize={0.5}
           color="white"
           anchorX="center"
           anchorY="middle"
