@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import { Frame } from "./getFrame";
 import { arrayBounds } from "./helpers";
 
-const gradientStart = { r: 0, g: 255, b: 0 };
-const gradientEnd = { r: 0, g: 0, b: 255 };
+const gradientStart = { r: 0, g: 0, b: 255 };
+const gradientEnd = { r: 255, g: 0, b: 0 };
 
 function makeGradientFucntion(
   minValue: number,
@@ -25,9 +25,7 @@ function makeGradientFucntion(
  * @returns the value corresponding to that percentage of the gradient, in hex value
  */
 function gradientValue(p: number, channel: keyof typeof gradientStart) {
-  return (
-    Math.floor(gradientStart[channel] + (gradientEnd[channel] - gradientStart[channel] * p))
-  );
+  return (gradientStart[channel] + ((gradientEnd[channel] - gradientStart[channel]) * p) / 100) / 255;
 }
 
 export function FramePoints({ frame }: { frame: Frame }) {
@@ -48,7 +46,7 @@ export function FramePoints({ frame }: { frame: Frame }) {
     const yCoords = frame.points.map(([_, y]) => y);
     const [min, max] = arrayBounds(yCoords);
     const gradientFunction =  makeGradientFucntion(min, max);
-    const bufferColor = yCoords.map(y => gradientFunction(y)).reduce((acc, curr) => {acc.push(...curr); return acc} ,[] as number[])
+    const bufferColor = yCoords.map(y => gradientFunction(y)).reduce((acc, curr) => {acc.push(...curr); return acc} ,[] as number[]);
     return new Float32Array(bufferColor);
   },[frame])
 
@@ -64,7 +62,7 @@ export function FramePoints({ frame }: { frame: Frame }) {
         <bufferAttribute
           attach="attributes-color"
           array={colors}
-          count={pts.length / 3}
+          count={colors.length / 3}
           itemSize={3}
         />
       </bufferGeometry >
