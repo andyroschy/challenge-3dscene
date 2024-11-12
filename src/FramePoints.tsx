@@ -5,6 +5,13 @@ import { arrayBounds } from "./helpers";
 const gradientStart = { r: 0, g: 0, b: 255 };
 const gradientEnd = { r: 255, g: 0, b: 0 };
 
+
+/**
+ * Creates a function that can caluclate the appropiate color based on the gradient for a given height
+ * @param minValue minimum height on the point cloud
+ * @param maxValue maximum height on the point cloud
+ * @returns 
+ */
 function makeGradientFucntion(
   minValue: number,
   maxValue: number
@@ -19,10 +26,9 @@ function makeGradientFucntion(
 }
 
 /**
- *
  * @param p percentage of the gradient - 0 being the start of the gradient and 100 being the end of the gradient
  * @param channel color channel to compute the value
- * @returns the value corresponding to that percentage of the gradient, in hex value
+ * @returns the value corresponding to that percentage of the gradient for the given height
  */
 function gradientValue(p: number, channel: keyof typeof gradientStart) {
   return (gradientStart[channel] + ((gradientEnd[channel] - gradientStart[channel]) * p) / 100) / 255;

@@ -23,7 +23,7 @@ export function Cuboids({ frame }: { frame: Frame }) {
                 ]}
               ></boxGeometry>
               <meshBasicMaterial
-                color="green"
+                color="orange"
                 transparent={true}
                 opacity={0.3}
               ></meshBasicMaterial>
@@ -45,7 +45,7 @@ export function Cuboids({ frame }: { frame: Frame }) {
                   ),
                 ]}
               ></edgesGeometry>
-              <lineBasicMaterial color="teal"></lineBasicMaterial>
+              <lineBasicMaterial color="yellow"></lineBasicMaterial>
             </lineSegments>
           </group>
         );
