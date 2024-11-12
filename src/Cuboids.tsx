@@ -6,9 +6,8 @@ export function Cuboids({ frame }: { frame: Frame }) {
     <>
       {frame.cuboids.map((cuboid) => {
         return (
-          <group>
+          <group key={cuboid.uuid}>
             <mesh
-              key={cuboid.uuid}
               position={[
                 cuboid.position.x,
                 cuboid.position.y,
